@@ -39,7 +39,7 @@ export default class Exit extends Decorator {
     callBlackboardFunction = (board, isSuccess, isAborted) => {
         // Call the blackboard function if it exists.
         if (typeof board[this.functionName] === "function") {
-            board[this.functionName].call(board, this._fnData, { succeeded: isSuccess, aborted: isAborted });
+            board[this.functionName].call(board, board, this._fnData, { succeeded: isSuccess, aborted: isAborted });
         } else {
             throw `cannot call exit decorator function '${this.functionName}' is not defined in the blackboard`;
         }

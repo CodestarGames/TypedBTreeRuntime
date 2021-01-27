@@ -42,7 +42,7 @@ export default class While extends Decorator {
     isSatisfied = (board) => {
         // Call the condition function to determine whether this guard is satisfied.
         if (typeof board[this.condition] === "function") {
-            return !!(board[this.condition].call(board));
+            return !!(board[this.condition].call(board, board));
         } else {
             throw `cannot evaluate node guard as function '${this.condition}' is not defined in the blackboard`;
         }
