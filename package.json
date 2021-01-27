@@ -1,0 +1,51 @@
+{
+  "name": "TypedBTreeRuntime",
+  "type": "module",
+  "version": "2.0.1",
+  "description": "Run behaviour trees in Typescript",
+  "main": "dist/bundle.js",
+  "types": "dist/typedBTree.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.7.0",
+    "ts-loader": "^8.0.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestargames/TypedBTreeRuntime.git"
+  },
+  "keywords": [
+    "behavior",
+    "behaviour",
+    "bt",
+    "tree",
+    "ai",
+    "artificial",
+    "intelligence",
+    "enemy",
+    "machine",
+    "state"
+  ],
+  "author": "Donald Baird",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codestargames/typedBTree/issues"
+  },
+  "dependencies": {
+    "typescript": "^4.0.2"
+  }
+}
