@@ -22,7 +22,7 @@ export default class Condition extends Leaf {
     onUpdate(board) {
         // Call the condition function to determine the state of this node, but it must exist in the blackboard.
         if (typeof board[this._condition] === "function") {
-            this.setState(!!(board[this._condition].call(board)) ? State.SUCCEEDED : State.FAILED);
+            this.setState(!!(board[this._condition].call(board, board)) ? State.SUCCEEDED : State.FAILED);
         } else {
             throw `cannot update condition node as function '${this._condition}' is not defined in the blackboard`;
         }
