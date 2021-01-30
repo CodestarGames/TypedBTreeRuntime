@@ -51,7 +51,7 @@ export default class Until extends Decorator {
     toJSON(){
         return {
             "$type": "$$.Hooks.Until",
-            "$condition": this.condition && { $type: this.condition }
+            "$condition": this.condition
         }
     }
 };
