@@ -143,11 +143,11 @@ export class RootNodesBuilder {
             let decorator;
             switch (hook.$type) {
                 case "$$.Hooks.Until":
-                    decorator = DecoratorFactories.UNTIL(hook.condition.$type);
+                    decorator = DecoratorFactories.UNTIL(hook.$condition);
                     decorators.push(decorator);
                     break;
                 case "$$.Hooks.While":
-                    decorator = DecoratorFactories.WHILE(hook.condition.$type);
+                    decorator = DecoratorFactories.WHILE(hook.$condition);
                     decorators.push(decorator);
                     break;
                 case "$$.Hooks.Entry":
