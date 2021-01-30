@@ -1,7 +1,7 @@
 {
   "name": "TypedBTreeRuntime",
   "type": "module",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Run behaviour trees in Typescript",
   "main": "dist/bundle.js",
   "types": "dist/typedBTree.d.ts",

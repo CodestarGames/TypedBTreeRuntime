@@ -51,7 +51,7 @@ export default class While extends Decorator {
     toJSON(){
         return {
             "$type": "$$.Hooks.While",
-            "condition": this.condition && { $type: this.condition }
+            "$condition": this.condition && { $type: this.condition }
         }
     }
 
