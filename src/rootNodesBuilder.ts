@@ -96,7 +96,7 @@ export class RootNodesBuilder {
                 node = ASTNodeFactories.CONDITION();
                 this.stack[this.stack.length-1].push(node);
 
-                node.conditionFunction = item['condition']['$type'];
+                node.conditionFunction = item['$condition'];
 
                 // Try to pick any decorators off of the token stack.
                 node.decorators = this.getDecorators(item.hooks);
