@@ -50,4 +50,15 @@ export default class Entry extends Decorator {
             "action": this.getFunctionName()
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Hooks.Entry",
+        "fields": [
+            {
+                "name": "action",
+                "valueType": "$$.Action",
+                "isArray": false
+            }
+        ]
+    }
 };

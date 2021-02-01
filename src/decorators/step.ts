@@ -41,4 +41,15 @@ export default class Step extends Decorator {
             throw `cannot call entry decorator function '${this.functionName}' is not defined in the blackboard`;
         }
     };
+
+    static schema = {
+        "nodeType": "$$.Hooks.Step",
+        "fields": [
+            {
+                "name": "action",
+                "valueType": "$$.Action",
+                "isArray": false
+            }
+        ]
+    }
 };

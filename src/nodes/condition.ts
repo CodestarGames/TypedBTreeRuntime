@@ -35,5 +35,17 @@ export default class Condition extends Leaf {
             state: this.getStateAsString()
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Condition",
+        "comment": "Return SUCCESS if condition passes",
+        "fields": [
+            {
+                "name": "$condition",
+                "valueType": "$$.Cond",
+                "isArray": false
+            }
+        ]
+    }
 };
 

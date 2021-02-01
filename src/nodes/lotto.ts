@@ -66,6 +66,27 @@ export default class Lotto extends Composite {
             state: this.getStateAsString()
         }
     }
+
+    static schema =  {
+        "nodeType": "$$.Lotto",
+        "comment": "",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "$data.tickets",
+                "valueType": "string"
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": true
+            }
+        ]
+    }
 };
 
 interface IParticipant {
@@ -128,5 +149,6 @@ class LottoDraw {
         // Return a random item.
         return items[Math.floor(Math.random() * items.length)];
     }
+
 
 }

@@ -52,5 +52,22 @@ export default class Flip extends Composite {
             state: this.getStateAsString()
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Flip",
+        "comment": "",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": false
+            }
+        ]
+    }
 };
 

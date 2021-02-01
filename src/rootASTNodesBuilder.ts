@@ -114,9 +114,9 @@ export const ASTNodeFactories = {
         decorators: [],
         children: [],
         validate: function (depth) {
-            // A sequence node must have at least a single node.
+            // A Sequence node must have at least a single node.
             if (this.children.length < 1) {
-                throw "a sequence node must have at least a single child";
+                throw "a Sequence node must have at least a single child";
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
@@ -171,26 +171,26 @@ export const ASTNodeFactories = {
         maximumIterations: null,
         children: [],
         validate: function (depth) {
-            // A repeat node must have a single node.
+            // A Repeat node must have a single node.
             if (this.children.length !== 1) {
-                throw "a repeat node must have a single child";
+                throw "a Repeat node must have a single child";
             }
 
-            // A repeat node must have a positive number of iterations if defined.
+            // A Repeat node must have a positive number of iterations if defined.
             if (this.iterations !== null && this.iterations < 0) {
                 this.iterations = null;
             }
 
             // There is validation to carry out if a longest duration was defined.
             if (this.maximumIterations !== null) {
-                // A repeat node must have a positive maximum iterations count if defined.
+                // A Repeat node must have a positive maximum iterations count if defined.
                 if (this.maximumIterations < 0) {
-                    throw "a repeat node must have a positive maximum iterations count if defined";
+                    throw "a Repeat node must have a positive maximum iterations count if defined";
                 }
 
-                // A repeat node must not have an iteration count that exceeds the maximum iteration count.
+                // A Repeat node must not have an iteration count that exceeds the maximum iteration count.
                 if (this.iterations > this.maximumIterations) {
-                    throw "a repeat node must not have an iteration count that exceeds the maximum iteration count";
+                    throw "a Repeat node must not have an iteration count that exceeds the maximum iteration count";
                 }
             }
         },
@@ -238,21 +238,21 @@ export const ASTNodeFactories = {
         duration: null,
         longestDuration: null,
         validate: function (depth) {
-            // A wait node must have a positive duration.
+            // A Wait node must have a positive duration.
             if (this.duration < 0) {
-                throw "a wait node must have a positive duration";
+                throw "a Wait node must have a positive duration";
             }
 
             // There is validation to carry out if a longest duration was defined.
             if (this.longestDuration) {
-                // A wait node must have a positive longest duration.
+                // A Wait node must have a positive longest duration.
                 if (this.longestDuration < 0) {
-                    throw "a wait node must have a positive longest duration if one is defined";
+                    throw "a Wait node must have a positive longest duration if one is defined";
                 }
 
-                // A wait node must not have a duration that exceeds the longest duration.
+                // A Wait node must not have a duration that exceeds the longest duration.
                 if (this.duration > this.longestDuration) {
-                    throw "a wait node must not have a shortest duration that exceeds the longest duration";
+                    throw "a Wait node must not have a shortest duration that exceeds the longest duration";
                 }
             }
         },

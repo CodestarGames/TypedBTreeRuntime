@@ -10,13 +10,13 @@ export default class Repeat extends Composite {
     /**
      * A REPEAT node.
      * The node has a single child which can have:
-     * -- A number of iterations for which to repeat the child node.
-     * -- An infinite repeat loop if neither an iteration count or a condition function is defined.
+     * -- A number of iterations for which to Repeat the child node.
+     * -- An infinite Repeat loop if neither an iteration count or a condition function is defined.
      * The REPEAT node will stop and have a 'FAILED' state if its child is ever in a 'FAILED' state after an update.
      * The REPEAT node will attempt to move on to the next iteration if its child is ever in a 'SUCCEEDED' state.
      * @param decorators The node decorators.
-     * @param iterations The number of iterations to repeat the child node, or the minimum number of iterations if maximumIterations is defined.
-     * @param maximumIterations The maximum number of iterations to repeat the child node.
+     * @param iterations The number of iterations to Repeat the child node, or the minimum number of iterations if maximumIterations is defined.
+     * @param maximumIterations The maximum number of iterations to Repeat the child node.
      * @param child The child node.
      */
     constructor(decorators, iterations, maximumIterations, child) {
@@ -42,7 +42,7 @@ export default class Repeat extends Composite {
             return `REPEAT ${ this._maximumIterations ? this._iterations + "x-" + this._maximumIterations + "x" : this._iterations + "x" }`;
         }
 
-        // Return the default repeat node name.
+        // Return the default Repeat node name.
         return "REPEAT";
     }
 
@@ -129,6 +129,27 @@ export default class Repeat extends Composite {
             children: this._child,
             state: this.getStateAsString()
         }
+    }
+
+    static schema = {
+        "nodeType": "$$.Repeat",
+        "comment": "Invoke X number of times",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "$data.times",
+                "valueType": "number"
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": false
+            }
+        ]
     }
 };
 

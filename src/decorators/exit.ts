@@ -44,4 +44,15 @@ export default class Exit extends Decorator {
             throw `cannot call exit decorator function '${this.functionName}' is not defined in the blackboard`;
         }
     };
+
+    static schema = {
+        "nodeType": "$$.Hooks.Exit",
+        "fields": [
+            {
+                "name": "action",
+                "valueType": "$$.Action",
+                "isArray": false
+            }
+        ]
+    }
 };

@@ -10,8 +10,8 @@ export default class Wait extends Leaf {
      * A WAIT node.
      * The state of this node will change to SUCCEEDED after a duration of time.
      * @param decorators The node decorators.
-     * @param duration The duration that this node will wait to succeed in milliseconds, or the earliest if longestDuration is defined.
-     * @param longestDuration The longest possible duration in milliseconds that this node will wait to succeed.
+     * @param duration The duration that this node will Wait to succeed in milliseconds, or the earliest if longestDuration is defined.
+     * @param longestDuration The longest possible duration in milliseconds that this node will Wait to succeed.
      */
     constructor(decorators, duration, longestDuration) {
         super("wait", decorators);
@@ -62,6 +62,22 @@ export default class Wait extends Leaf {
             "$data.duration": this._duration,
             state: this.getStateAsString()
         }
+    }
+
+    static schema = {
+        "nodeType": "$$.Wait",
+        "comment": "",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "$data.duration",
+                "valueType": "number"
+            }
+        ]
     }
 };
 

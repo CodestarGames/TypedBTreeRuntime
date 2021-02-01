@@ -4,7 +4,7 @@ import {State} from "../state";
 export default class Sequence extends Composite {
     /**
      * A SEQUENCE node.
-     * The child nodes are executed in sequence until one fails or all succeed.
+     * The child nodes are executed in Sequence until one fails or all succeed.
      * @param decorators The node decorators.
      * @param children The child nodes.
      */
@@ -29,16 +29,16 @@ export default class Sequence extends Composite {
 
             // If the current child has a state of 'SUCCEEDED' then we should move on to the next child.
             if (child.getState() === State.SUCCEEDED) {
-                // Find out if the current child is the last one in the sequence.
-                // If it is then this sequence node has also succeeded.
+                // Find out if the current child is the last one in the Sequence.
+                // If it is then this Sequence node has also succeeded.
                 if (this._children.indexOf(child) === this._children.length - 1) {
                     // This node is a 'SUCCEEDED' node.
                     this.setState(State.SUCCEEDED);
 
-                    // There is no need to check the rest of the sequence as we have completed it.
+                    // There is no need to check the rest of the Sequence as we have completed it.
                     return;
                 } else {
-                    // The child node succeeded, but we have not finished the sequence yet.
+                    // The child node succeeded, but we have not finished the Sequence yet.
                     continue;
                 }
             }
@@ -48,7 +48,7 @@ export default class Sequence extends Composite {
                 // This node is a 'FAILED' node.
                 this.setState(State.FAILED);
 
-                // There is no need to check the rest of the sequence.
+                // There is no need to check the rest of the Sequence.
                 return;
             }
 
@@ -57,7 +57,7 @@ export default class Sequence extends Composite {
                 // This node is a 'RUNNING' node.
                 this.setState(State.RUNNING);
 
-                // There is no need to check the rest of the sequence as the current child is still running.
+                // There is no need to check the rest of the Sequence as the current child is still running.
                 return;
             }
 
@@ -73,6 +73,23 @@ export default class Sequence extends Composite {
             children: this._children,
             state: this.getStateAsString()
         }
+    }
+
+    static schema = {
+        "nodeType": "$$.Sequence",
+        "comment": "Invoke all children in Sequence (the first one that fails stops the chain)",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": true
+            }
+        ]
     }
 };
 

@@ -54,4 +54,15 @@ export default class Until extends Decorator {
             "$condition": this.condition
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Hooks.Until",
+        "fields": [
+            {
+                "name": "$condition",
+                "valueType": "$$.Cond",
+                "isArray": false
+            }
+        ]
+    }
 };

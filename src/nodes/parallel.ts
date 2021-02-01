@@ -79,5 +79,22 @@ export default class Parallel extends Composite {
             state: this.getStateAsString()
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Parallel",
+        "comment": "",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": true
+            }
+        ]
+    }
 };
 

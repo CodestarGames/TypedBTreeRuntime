@@ -37,5 +37,21 @@ export default class Root extends Composite {
             state: this.getStateAsString()
         }
     }
+
+    static schema = {
+        "nodeType": "$$.Root",
+        "comment": "Invoke the tree",
+        "fields": [
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": false
+            },
+            {
+                "name": "$data.treeName",
+                "valueType": "string"
+            }
+        ]
+    }
 };
 

@@ -55,4 +55,14 @@ export default class While extends Decorator {
         }
     }
 
+    static schema = {
+        "nodeType": "$$.Hooks.While",
+        "fields": [
+            {
+                "name": "$condition",
+                "valueType": "$$.Cond",
+                "isArray": false
+            }
+        ]
+    }
 };

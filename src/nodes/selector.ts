@@ -4,7 +4,7 @@ import {State} from "../state";
 export default class Selector extends Composite {
     /**
      * A SELECTOR node.
-     * The child nodes are executed in sequence until one succeeds or all fail.
+     * The child nodes are executed in Sequence until one succeeds or all fail.
      * @param decorators The node decorators.
      * @param children The child nodes.
      */
@@ -39,7 +39,7 @@ export default class Selector extends Composite {
             // If the current child has a state of 'FAILED' then we should move on to the next child.
             if (child.getState() === State.FAILED) {
                 // Find out if the current child is the last one in the selector.
-                // If it is then this sequence node has also failed.
+                // If it is then this Sequence node has also failed.
                 if (this._children.indexOf(child) === this._children.length - 1) {
                     // This node is a 'FAILED' node.
                     this.setState(State.FAILED);
@@ -73,6 +73,23 @@ export default class Selector extends Composite {
             children: this._children,
             state: this.getStateAsString()
         }
+    }
+
+    static schema = {
+        "nodeType": "$$.Selector",
+        "comment": "Invoke the first child that succeeds",
+        "fields": [
+            {
+                "name": "hooks",
+                "valueType": "$$.Hook",
+                "isArray": true
+            },
+            {
+                "name": "children",
+                "valueType": "$$.Item",
+                "isArray": true
+            }
+        ]
     }
 };
 
