@@ -8,7 +8,7 @@ export class RootNodesBuilder {
     TraverseContent(contentItem: Array<any>) {
         contentItem.forEach((item, index, array) => {
 
-            let node;
+            let node: any = {collapsed: true};
             node.collapsed = item['collapsed'] || true;
 
             if (item['$type'] === "$$.Root") {
