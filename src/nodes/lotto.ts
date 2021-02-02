@@ -80,7 +80,8 @@ export default class Lotto extends Composite {
             },
             {
                 "name": "$data.tickets",
-                "valueType": "string"
+                "valueType": "string",
+                "isArray": false
             },
             {
                 "name": "children",
