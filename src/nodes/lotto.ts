@@ -62,7 +62,7 @@ export default class Lotto extends Composite {
         return {
             hooks: this.getDecorators(),
             $type: "$$.Lotto",
-            "$data.tickets": this._tickets,
+            "$data.tickets": this._tickets.toString(),
             children: this._children,
             collapsed: this.collapsed,
             state: this.getStateAsString()
