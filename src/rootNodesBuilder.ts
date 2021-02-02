@@ -33,7 +33,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Selector") {
                 node = ASTNodeFactories.SELECTOR();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 this.handleChildren(node, item);
                 node.decorators = this.getDecorators(item.hooks);
                 return;
@@ -41,7 +41,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Sequence") {
                 node = ASTNodeFactories.SEQUENCE();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 this.handleChildren(node, item);
                 node.decorators = this.getDecorators(item.hooks);
                 return;
@@ -49,7 +49,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Repeat") {
                 node = ASTNodeFactories.REPEAT();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 //TODO: set props
                 node.iterations = item[`$data.times`];
                 this.handleChildren(node, item);
@@ -59,7 +59,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Lotto") {
                 node = ASTNodeFactories.LOTTO();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 //TODO: set props
                 node.props = {tickets: item[`$data.tickets`].split(",")};
                 this.handleChildren(node, item);
@@ -69,7 +69,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Flip") {
                 node = ASTNodeFactories.FLIP();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
 
                 this.handleChildren(node, item);
                 node.decorators = this.getDecorators(item.hooks);
@@ -79,7 +79,7 @@ export class RootNodesBuilder {
 
             if (item['$type'] === "$$.Parallel") {
                 node = ASTNodeFactories.PARALLEL();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
 
                 this.handleChildren(node, item);
                 node.decorators = this.getDecorators(item.hooks);
@@ -88,7 +88,7 @@ export class RootNodesBuilder {
 
             if (item['$type'].indexOf('$$.Actions')  > -1) {
                 node = ASTNodeFactories.ACTION();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 this.stack[this.stack.length-1].push(node);
 
                 node.actionName = item['$type'];//.split(".").reverse()[0];
@@ -102,7 +102,7 @@ export class RootNodesBuilder {
 
             if (item['$type'].indexOf('$$.Condition')  > -1) {
                 node = ASTNodeFactories.CONDITION();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 this.stack[this.stack.length-1].push(node);
 
                 node.conditionFunction = item['$condition'];
@@ -114,7 +114,7 @@ export class RootNodesBuilder {
 
             if (item['$type'].indexOf('$$.Wait')  > -1) {
                 node = ASTNodeFactories.WAIT();
-                node.collapsed = item['collapsed'] || true;
+                node.collapsed = item['collapsed'] ?? true;
                 this.stack[this.stack.length-1].push(node);
                 node.duration = item[`$data.duration`];
                 // Try to pick any decorators off of the token stack.
