@@ -71,6 +71,7 @@ export default class Selector extends Composite {
             hooks: this.getDecorators(),
             $type: "$$.Selector",
             children: this._children,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

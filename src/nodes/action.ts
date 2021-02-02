@@ -8,6 +8,7 @@ export default class Action extends Leaf {
         return {
             $type: this._actionName,
             ...this._actionProps,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     };

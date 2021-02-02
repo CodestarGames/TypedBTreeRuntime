@@ -31,6 +31,7 @@ export default class Condition extends Leaf {
     toJSON() {
         return {
             $type: "$$.Condition",
+            collapsed: this.collapsed,
             $condition: this._condition,
             state: this.getStateAsString()
         }

@@ -7,9 +7,10 @@ import Step from "../decorators/step";
 export default abstract class Node {
   private readonly _type: any;
   private readonly _decorators: any;
-  private state: any;
-  private guardPath: any;
-  private readonly uid: any;
+  protected state: any;
+  protected guardPath: any;
+  protected readonly uid: any;
+  protected collapsed: boolean;
   /**
    * A base node.
    * @param type The node type.

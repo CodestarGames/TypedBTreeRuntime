@@ -71,6 +71,7 @@ export default class Sequence extends Composite {
             hooks: this.getDecorators(),
             $type: "$$.Sequence",
             children: this._children,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

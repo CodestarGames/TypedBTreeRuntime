@@ -127,6 +127,7 @@ export default class Repeat extends Composite {
             $type: "$$.Repeat",
             "$data.times": this._iterations,
             children: this._child,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

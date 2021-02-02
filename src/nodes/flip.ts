@@ -49,6 +49,7 @@ export default class Flip extends Composite {
             hooks: this.getDecorators(),
             $type: "$$.Flip",
             children: this._child,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

@@ -76,6 +76,7 @@ export default class Parallel extends Composite {
             hooks: this.getDecorators(),
             $type: "$$.Parallel",
             children: this._children,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

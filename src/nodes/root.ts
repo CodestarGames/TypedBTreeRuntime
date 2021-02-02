@@ -34,6 +34,7 @@ export default class Root extends Composite {
         return {
             $type: "$$.Root",
             "children": this._child,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }

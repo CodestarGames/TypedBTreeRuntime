@@ -30,6 +30,7 @@ type NodeFunc = (namedRootNodeProvider: any, visitedBranches: any) => (Node | Le
 
 interface IAstNode {
     type: string;
+    collapsed: boolean;
     decorators?: any[];
     name?: string | null;
     children: any[];
@@ -46,6 +47,7 @@ interface IAstNode {
 export const ASTNodeFactories = {
     "ROOT": () : any => ({
         type: "root",
+        collapsed: true,
         decorators: [],
         name: null,
         children: [],
@@ -69,6 +71,7 @@ export const ASTNodeFactories = {
     }),
     "BRANCH": () : any => ({
         type: "branch",
+        collapsed: true,
         props: {
             branchName: ""
         },
@@ -94,6 +97,7 @@ export const ASTNodeFactories = {
     }),
     "SELECTOR": () : IAstNode => ({
         type: "selector",
+        collapsed: true,
         decorators: [],
         children: [],
         validate: function (depth) {
@@ -103,14 +107,15 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Selector(
+            return Object.assign(new Selector(
                 this.decorators,
                 this.children.map((child) => child.createNodeInstance(namedRootNodeProvider, visitedBranches.slice()))
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "SEQUENCE": () : IAstNode => ({
         type: "sequence",
+        collapsed: true,
         decorators: [],
         children: [],
         validate: function (depth) {
@@ -120,14 +125,15 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Sequence(
+            return Object.assign(new Sequence(
                 this.decorators,
                 this.children.map((child) => child.createNodeInstance(namedRootNodeProvider, visitedBranches.slice()))
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "PARALLEL": () : IAstNode => ({
         type: "parallel",
+        collapsed: true,
         decorators: [],
         children: [],
         validate: function (depth) {
@@ -137,14 +143,15 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Parallel(
+            return Object.assign(new Parallel(
                 this.decorators,
                 this.children.map((child) => child.createNodeInstance(namedRootNodeProvider, visitedBranches.slice()))
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "LOTTO": () : IAstNode => ({
         type: "lotto",
+        collapsed: true,
         decorators: [],
         children: [],
         props: {
@@ -157,15 +164,16 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Lotto(
+            return Object.assign(new Lotto(
                 this.decorators,
                 this.props?.tickets,
                 this.children.map((child) => child.createNodeInstance(namedRootNodeProvider, visitedBranches.slice()))
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "REPEAT": () : any => ({
         type: "repeat",
+        collapsed: true,
         decorators: [],
         iterations: null,
         maximumIterations: null,
@@ -195,16 +203,17 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Repeat(
+            return Object.assign(new Repeat(
                 this.decorators,
                 this.iterations,
                 this.maximumIterations,
                 this.children[0].createNodeInstance(namedRootNodeProvider, visitedBranches.slice())
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "FLIP": () : IAstNode => ({
         type: "flip",
+        collapsed: true,
         decorators: [],
         children: [],
         validate: function (depth) {
@@ -222,18 +231,20 @@ export const ASTNodeFactories = {
     }),
     "CONDITION": () : any => ({
         type: "condition",
+        collapsed: true,
         decorators: [],
         conditionFunction: "",
         validate: function (depth) {},
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Condition(
+            return Object.assign(new Condition(
                 this.decorators,
                 this.conditionFunction
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "WAIT": () : any => ({
         type: "wait",
+        collapsed: true,
         decorators: [],
         duration: null,
         longestDuration: null,
@@ -257,25 +268,26 @@ export const ASTNodeFactories = {
             }
         },
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Wait(
+            return Object.assign(new Wait(
                 this.decorators,
                 this.duration,
                 this.longestDuration
-            );
+            ), { collapsed: this.collapsed });
         }
     }),
     "ACTION": () : any => ({
         type: "action",
+        collapsed: true,
         decorators: [],
         actionName: "",
         props: {},
         validate: function (depth) {},
         createNodeInstance: function (namedRootNodeProvider, visitedBranches) {
-            return new Action(
+            return Object.assign(new Action(
                 this.decorators,
                 this.actionName,
                 this.props
-            );
+            ), { collapsed: this.collapsed });
         }
     })
 };

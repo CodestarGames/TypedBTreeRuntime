@@ -1,9 +1,14 @@
 import Composite from './composite'
 import {State} from "../state";
 
+/**
+ * The winning child node.
+ */
+let winningChild;
+
 export default class Lotto extends Composite {
     private readonly _tickets: any;
-    private winningChild: any;
+
     /**
      * A LOTTO node.
      * A winning child is picked on the initial update of this node, based on ticket weighting.
@@ -15,10 +20,6 @@ export default class Lotto extends Composite {
     constructor(decorators, tickets, children) {
         super("lotto", decorators, children);
 
-        /**
-         * The winning child node.
-         */
-        let winningChild;
 
         /**
          * Represents a lotto draw.
@@ -37,7 +38,7 @@ export default class Lotto extends Composite {
 
     onUpdate(board) {
         // If this node is in the READY state then we need to pick a winning child node.
-        if (this.is(State.READY)) {
+        if (this.is(State.READY) || !winningChild) {
             // Create a lotto draw.
             const lottoDraw = new LottoDraw();
 
@@ -45,16 +46,16 @@ export default class Lotto extends Composite {
             this._children.forEach((child, index) => lottoDraw.add(child, this._tickets[index] || 1));
 
             // Randomly pick a child based on ticket weighting.
-            this.winningChild = lottoDraw.draw();
+            winningChild = lottoDraw.draw();
         }
 
         // If the winning child has never been updated or is running then we will need to update it now.
-        if (this.winningChild.getState() === State.READY || this.winningChild.getState() === State.RUNNING) {
-            this.winningChild.update(board);
+        if (winningChild.getState() === State.READY || winningChild.getState() === State.RUNNING) {
+            winningChild.update(board);
         }
 
         // The state of the lotto node is the state of its winning child.
-        this.setState(this.winningChild.getState());
+        this.setState(winningChild.getState());
     }
 
     toJSON() {
@@ -63,6 +64,7 @@ export default class Lotto extends Composite {
             $type: "$$.Lotto",
             "$data.tickets": this._tickets,
             children: this._children,
+            collapsed: this.collapsed,
             state: this.getStateAsString()
         }
     }
@@ -97,12 +99,12 @@ interface IParticipant {
 class LottoDraw {
 
     constructor() {
-
+        this.participants = [];
     }
     /**
      * The participants
      */
-    participants = new Array<any>();
+    participants: Array<any>;
 
     /**
      * Add a participant.
@@ -124,7 +126,7 @@ class LottoDraw {
             throw "cannot draw a lotto winner when there are no participants";
         }
 
-        const pickable = new Array<any>();
+        const pickable = [];
 
         this.participants.forEach((item : IParticipant) => {
             for (let ticketCount = 0; ticketCount < item.tickets; ticketCount++) {
@@ -147,7 +149,7 @@ class LottoDraw {
         }
 
         // Return a random item.
-        return items[Math.floor(Math.random() * items.length)];
+        return items[Math.floor(Math.random()*items.length)];
     }
 
 

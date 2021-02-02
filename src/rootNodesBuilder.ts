@@ -9,6 +9,7 @@ export class RootNodesBuilder {
         contentItem.forEach((item, index, array) => {
 
             let node;
+            node.collapsed = item['collapsed'] || true;
 
             if (item['$type'] === "$$.Root") {
                 node = ASTNodeFactories.ROOT();
@@ -56,7 +57,7 @@ export class RootNodesBuilder {
             if (item['$type'] === "$$.Lotto") {
                 node = ASTNodeFactories.LOTTO();
                 //TODO: set props
-                node.props = {tickets: item[`$data.tickets`]};
+                node.props = {tickets: item[`$data.tickets`].split(",")};
                 this.handleChildren(node, item);
                 node.decorators = this.getDecorators(item.hooks);
                 return;
